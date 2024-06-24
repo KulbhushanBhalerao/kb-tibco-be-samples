@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<event:SimpleEvent xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:event="http:///com/tibco/cep/designtime/core/model/event" folder="/Events/" name="eGetRSUAll" description="" GUID="EC644600-57CC-8C94-075C-2BAB3F9C0301" ownerProjectName="rsu-ignite-sample" superEventPath="" ttlUnits="Seconds" channelURI="/Channels/Incoming" destinationName="getRSUAll">
+  <expiryAction folder="/Events/eGetRSUAll" name="eGetAllRSUs_expiryAction" ownerProjectName="rsu-ignite-sample" actionText="" conditionText="">
+    <symbols>
+      <symbolList idName="egetallrsus" type="/Events/eGetRSUAll"/>
+    </symbols>
+  </expiryAction>
+</event:SimpleEvent>

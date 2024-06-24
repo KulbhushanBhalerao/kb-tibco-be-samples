@@ -1,0 +1,17 @@
+/**
+ * @description 
+ */
+void rulefunction RuleFunctions.OnStartup {
+	attribute {
+		validity = ACTION;
+	}
+	scope {
+		
+	}
+	body {
+		
+		System.debugOut("### " + Engine.currentRule() + " On startup Create RSUs");
+		
+		startUpCreateRSUs();
+	}
+}
