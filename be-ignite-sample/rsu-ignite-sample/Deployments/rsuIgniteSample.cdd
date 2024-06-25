@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <cluster xmlns="http://tibco.com/businessevents/configuration/6.3">
     <revision>
-        <version>24</version>
+        <version>28</version>
         <author>kbhalera</author>
-        <date>2024/06/24 21:32:35</date>
+        <date>2024/06/25 14:12:35</date>
         <comment/>
     </revision>
     <name>rsuIgniteSample</name>
@@ -280,6 +280,11 @@
                     <key/>
                     <priority/>
                 </agent>
+                <agent>
+                    <ref>query-class</ref>
+                    <key/>
+                    <priority/>
+                </agent>
             </agents>
             <logs>logConfig</logs>
             <hot-deploy>false</hot-deploy>
@@ -315,5 +320,10 @@
             </property-group>
         </property-group>
         <property name="be.engine.id.useLegacy" value="false"/>
+        <property-group comment="" name="auth">
+            <property name="be.mm.auth.type" value="file"/>
+            <property name="be.mm.auth.file.location" value="/opt/tibco/be/be/6.3/mm/config/users.pwd"/>
+            <property name="java.security.auth.login.config" value="/opt/tibco/be/be/6.3/mm/config/jaas-config.config"/>
+        </property-group>
     </property-group>
 </cluster>

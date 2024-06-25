@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<element:Concept xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:element="http:///com/tibco/cep/designtime/core/model/element" folder="/Concepts/" name="cRSU" description="" GUID="D9F3830F-19F7-C7E7-8535-1E1A8E9AED76" ownerProjectName="rsu-ignite-sample" superConceptPath="" autoStartStateMachine="true">
+<element:Concept xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:element="http:///com/tibco/cep/designtime/core/model/element" folder="/Concepts/" name="cRSU" description="" GUID="584232C3-DB15-267C-8A6A-F033D42B81DB" ownerProjectName="rsu-ignite-sample" superConceptPath="" autoStartStateMachine="true">
   <extendedProperties/>
   <properties name="RSUNumber" ownerProjectName="rsu-ignite-sample" type="int"/>
   <properties name="dateCreated" ownerProjectName="rsu-ignite-sample" type="DateTime"/>

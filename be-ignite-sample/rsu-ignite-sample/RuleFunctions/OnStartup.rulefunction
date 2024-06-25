@@ -12,6 +12,10 @@ void rulefunction RuleFunctions.OnStartup {
 		
 		System.debugOut("### " + Engine.currentRule() + " On startup Create RSUs");
 		
+		//Create few RSUs 
 		startUpCreateRSUs();
+		
+		//Start a query session for BQL (not native) based queries
+		Query.Util.startDynamicQuerySession();
 	}
 }

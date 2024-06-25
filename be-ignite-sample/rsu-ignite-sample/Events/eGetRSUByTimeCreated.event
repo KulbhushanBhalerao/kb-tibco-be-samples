@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<event:SimpleEvent xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:event="http:///com/tibco/cep/designtime/core/model/event" folder="/Events/" name="eGetRSUByTimeCreated" description="" GUID="3BF34FD3-AE19-7679-356F-5FFAE690DA5A" ownerProjectName="rsu-ignite-sample" superEventPath="" ttlUnits="Seconds" channelURI="/Channels/Incoming" destinationName="getRSUByTimeCreated">
+<event:SimpleEvent xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:event="http:///com/tibco/cep/designtime/core/model/event" folder="/Events/" name="eGetRSUByTimeCreated" description="" GUID="D8C2F8AB-E934-4EC2-359A-A43E070434D9" ownerProjectName="rsu-ignite-sample" superEventPath="" ttlUnits="Seconds" channelURI="/Channels/Incoming" destinationName="getRSUByTimeCreated">
   <expiryAction folder="/Events/eGetRSUByTimeCreated" name="eGetRSUByTime_expiryAction" ownerProjectName="rsu-ignite-sample" actionText="" conditionText="">
     <symbols>
       <symbolList idName="egetrsubytime" type="/Events/eGetRSUByTimeCreated"/>
