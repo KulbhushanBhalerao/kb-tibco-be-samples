@@ -10,12 +10,13 @@ void rulefunction RuleFunctions.OnStartup {
 	}
 	body {
 		
-		System.debugOut("### " + Engine.currentRule() + " On startup Create RSUs");
+		System.debugOut("### " + Engine.currentRule() + " On startup: Create RSUs");
 		
 		//Create few RSUs 
 		startUpCreateRSUs();
-		
+		System.debugOut("### " + Engine.currentRule() + " On startup: Created RSUs");
 		//Start a query session for BQL (not native) based queries
 		Query.Util.startDynamicQuerySession();
+		System.debugOut("### " + Engine.currentRule() + " On startup: done with Query.Util.startDynamicQuerySession()");
 	}
 }

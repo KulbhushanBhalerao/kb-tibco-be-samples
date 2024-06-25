@@ -21,7 +21,7 @@ int rulefunction RuleFunctions.startUpCreateRSUs {
 			int rsu_number = 3000 + i;
 			
 			Concepts.cRSU.cRSU(String.valueOfInt(i), rsu_number, dtime , dtime_millis, dtime, dtime_millis, "ICNG");
-			System.debugOut("### " + Engine.currentRule() + " Created RSU: " + rsu_number);
+			System.debugOut("### " + Engine.currentRule() + " Created RSU: " + rsu_number + " at dtime_millis " + dtime_millis);
 			iCreated++; 
 		
 		}

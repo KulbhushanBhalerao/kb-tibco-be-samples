@@ -1,10 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<element:Concept xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:element="http:///com/tibco/cep/designtime/core/model/element" folder="/Concepts/" name="cRSU" description="" GUID="584232C3-DB15-267C-8A6A-F033D42B81DB" ownerProjectName="rsu-ignite-sample" superConceptPath="" autoStartStateMachine="true">
-  <extendedProperties/>
-  <properties name="RSUNumber" ownerProjectName="rsu-ignite-sample" type="int"/>
-  <properties name="dateCreated" ownerProjectName="rsu-ignite-sample" type="DateTime"/>
-  <properties name="dateCreatedMillis" ownerProjectName="rsu-ignite-sample" type="long"/>
-  <properties name="dateUpdated" ownerProjectName="rsu-ignite-sample" type="DateTime"/>
-  <properties name="dateUpdatedMillis" ownerProjectName="rsu-ignite-sample" type="long"/>
-  <properties name="RSUType" ownerProjectName="rsu-ignite-sample"/>
+<?xml version="1.0" encoding="UTF-8"?><element:Concept xmlns:element="http:///com/tibco/cep/designtime/core/model/element" xmlns:xmi="http://www.omg.org/XMI" xmi:version="2.0" folder="/Concepts/" name="cRSU" description="" GUID="EAD2AE2E-9423-0A61-7A7F-0501AA58C5B7" ownerProjectName="rsu-ignite-sample" superConceptPath="" autoStartStateMachine="true">
+    <extendedProperties/>
+    <properties name="RSUNumber" ownerProjectName="rsu-ignite-sample" type="int"/>
+    <properties name="dateCreated" ownerProjectName="rsu-ignite-sample" type="DateTime"/>
+    <properties name="dateCreatedMillis" ownerProjectName="rsu-ignite-sample" type="long"/>
+    <properties name="dateUpdated" ownerProjectName="rsu-ignite-sample" type="DateTime"/>
+    <properties name="dateUpdatedMillis" ownerProjectName="rsu-ignite-sample" type="long"/>
+    <properties name="RSUType" ownerProjectName="rsu-ignite-sample"/>
 </element:Concept>

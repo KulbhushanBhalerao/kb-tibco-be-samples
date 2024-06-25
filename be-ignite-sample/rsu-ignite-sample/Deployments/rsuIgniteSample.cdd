@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <cluster xmlns="http://tibco.com/businessevents/configuration/6.3">
     <revision>
-        <version>28</version>
+        <version>30</version>
         <author>kbhalera</author>
-        <date>2024/06/25 14:12:35</date>
+        <date>2024/06/25 16:15:41</date>
         <comment/>
     </revision>
     <name>rsuIgniteSample</name>
