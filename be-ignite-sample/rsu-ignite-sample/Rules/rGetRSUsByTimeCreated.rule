@@ -1,0 +1,84 @@
+/**
+ * @description 
+ * @author 31-149-14-42.biz.kpn.net
+ */
+rule Rules.rGetRSUsByTimeCreated {
+	attribute {
+		priority = 5;
+		forwardChain = true;
+	}
+	declare {
+		
+		Events.eGetRSUByTimeCreated evGetRSUByTC;
+	}
+	when {
+		
+	}
+	then {
+		
+		Events.eGetRSUByTimeCreated evReply = null;
+		
+		String dtFormat = "yyyy-MM-dd'T'HH:mm:ss.ss'Z'"; 
+		long lStart = System.currentTimeMillis();
+		long lTimeToProcess = 0;
+		String sWhere = "";
+		String sQuery = "native-query: select _EXTID from be_gen_concepts_cRSU cp" + sWhere;
+		
+		//TODO For now lets not test this.
+		if(evGetRSUByTC.dateCreated!=null)
+		{
+			System.debugOut("\n\n");
+			System.debugOut("### " + Engine.currentRule() + "======================= Test 1a: Query using Datetime ===========");
+			System.debugOut("### " + Engine.currentRule() + " Getting RSU after datetime " + DateTime.format(evGetRSUByTC.dateCreated,dtFormat));
+			
+			sWhere=" where cp.dateCreated >= " + evGetRSUByTC.dateCreated;
+			System.debugOut("### " + Engine.ruleName() + "Query: " + sQuery);
+			
+			Object oResultList = Query.Util.executeInDynamicQuerySession(sQuery, null, false);
+			Object[] oRows = Query.Util.listToArray(oResultList);
+
+			Query.Util.clearList(oResultList);
+			int iNumRows = oRows@length;
+
+			for (int i = 0; i < iNumRows; i++) {
+				String sExtID = oRows[i];
+				Concepts.cRSU cp = Instance.getByExtIdByUri(sExtID, "/Concepts/cRSU");
+				System.debugOut("### " + Engine.currentRule() + " RSU found: " + cp.RSUNumber + " date created: " + DateTime.format(cp.dateCreated,dtFormat) + ", in millis: " + cp.dateCreatedMillis);
+			}
+			
+			System.debugOut("### " + Engine.currentRule() + "======================= Test 1a: Done ===========\n");
+					
+		}
+		
+		//Only test getting RSUs created after datetime in millis
+		if(evGetRSUByTC.dateCreatedMillis>0)
+		{
+			System.debugOut("\n\n");
+			System.debugOut("### " + Engine.currentRule() + "======================= Test 1b: Query using Datetime in Millis ===========");
+			System.debugOut("### " + Engine.currentRule() + " Getting RSU after datetime in millis " + evGetRSUByTC.dateCreatedMillis);
+			
+			sWhere=" where /#DateTime/getTimeInMillis(cp.dateCreatedMillis)>=" + String.valueOfLong(evGetRSUByTC.dateCreatedMillis);
+			System.debugOut("### " + Engine.ruleName() + "Query: " + sQuery);
+			
+			Object oResultList = Query.Util.executeInDynamicQuerySession(sQuery, null, false);
+			Object[] oRows = Query.Util.listToArray(oResultList);
+
+			Query.Util.clearList(oResultList);
+			int iNumRows = oRows@length;
+
+			for (int i = 0; i < iNumRows; i++) {
+				String sExtID = oRows[i];
+				Concepts.cRSU cp = Instance.getByExtIdByUri(sExtID, "/Concepts/cRSU");
+				System.debugOut("### " + Engine.currentRule() + " RSU found: " + cp.RSUNumber + " date created: " + DateTime.format(cp.dateCreated,dtFormat) + ", in millis: " + cp.dateCreatedMillis);
+			}
+			System.debugOut("### " + Engine.currentRule() + "======================= Test 1b: Done ===========\n");
+		
+		}
+	
+	
+		// Processing time
+		lTimeToProcess = System.currentTimeMillis() - lStart;
+		System.debugOut("### " + Engine.currentRule() + " Processing time query " + lTimeToProcess);
+		
+	}
+}

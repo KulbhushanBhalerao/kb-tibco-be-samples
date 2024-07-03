@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?><event:SimpleEvent xmlns:event="http:///com/tibco/cep/designtime/core/model/event" xmlns:xmi="http://www.omg.org/XMI" xmi:version="2.0" folder="/Events/" name="eRSUReply" description="" GUID="309C009A-C7C6-7043-ED81-1AEA6771285C" ownerProjectName="rsu-ignite-sample" superEventPath="" ttlUnits="Seconds">
+    <properties name="RSUNumber" ownerProjectName="rsu-ignite-sample" type="int" ownerPath="/Events/eRSUReply"/>
+    <properties name="dateCreated" ownerProjectName="rsu-ignite-sample" type="DateTime" ownerPath="/Events/eRSUReply"/>
+    <properties name="dateCreatedMillis" ownerProjectName="rsu-ignite-sample" type="long" ownerPath="/Events/eRSUReply"/>
+    <properties name="dateUpdated" ownerProjectName="rsu-ignite-sample" type="DateTime" ownerPath="/Events/eRSUReply"/>
+    <properties name="dateUpdatedMillis" ownerProjectName="rsu-ignite-sample" type="long" ownerPath="/Events/eRSUReply"/>
+    <properties name="RSUType" ownerProjectName="rsu-ignite-sample" ownerPath="/Events/eRSUReply"/>
+    <expiryAction name="eRSUReply_expiryAction" ownerProjectName="rsu-ignite-sample" actionText="" conditionText="">
+        <symbols>
+            <symbolList idName="ersureply" type="/Events/eRSUReply"/>
+        </symbols>
+    </expiryAction>
+</event:SimpleEvent>

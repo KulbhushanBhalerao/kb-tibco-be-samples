@@ -1,0 +1,100 @@
+/**
+ * @description Creates one RSU on request
+ * @author kb-grey-mac.home
+ */
+rule Rules.rGetRSUByNumberCompareBQLTypes {
+	attribute {
+		priority = 5;
+		forwardChain = true;
+	}
+	declare {
+		Events.eGetRSUByNumberCompareBQLTypes ersu;
+	}
+	when {
+
+	}
+	then {
+		
+		Events.eGetRSUByNumberCompareBQLTypes evReply = null;
+		String dtFormat = "yyyy-MM-dd'T'HH:mm:ss.ss'Z'";
+		System.debugOut("\n\n");
+		System.debugOut("### " + Engine.currentRule() + "=======================Test 1a: Getting RSU using BQL native query ===========");
+		System.debugOut("### " + Engine.currentRule() + " Getting RSU using BQL native query: " + ersu.RSUNumber);
+		long lStart = System.currentTimeMillis();
+		long lTimeToProcess = 0;
+
+		// =======================Test 1a: Native Query ===========
+		// Native Query (faster but will not work with dateTime values)
+		//   - in query you can also select all required columns
+		//     -> not required to load concept with extID later
+		// ======================================================
+
+		String sWhere = " where cp.RSUNumber='" + ersu.RSUNumber + "'";
+		String sQuery = "native-query: select _EXTID from be_gen_concepts_cRSU cp" + sWhere;
+
+		System.debugOut("### " + Engine.ruleName() + "Query: " + sQuery);
+
+		Object oResultList = Query.Util.executeInDynamicQuerySession(sQuery, null, false);
+		Object[] oRows = Query.Util.listToArray(oResultList);
+
+		Query.Util.clearList(oResultList);
+		int iNumRows = oRows@length;
+
+		for (int i = 0; i < iNumRows; i++) {
+			String sExtID = oRows[i];
+			Concepts.cRSU cp = Instance.getByExtIdByUri(sExtID, "/Concepts/cRSU");
+			System.debugOut("### " + Engine.currentRule() + " RSU found: " + cp.RSUNumber + " date created: " + DateTime.format(cp.dateCreated,dtFormat) + ", in millis: " + cp.dateCreatedMillis);
+		}
+
+		// return results
+		lTimeToProcess = System.currentTimeMillis() - lStart;
+		System.debugOut("### " + Engine.currentRule() + " Processing time native query " + lTimeToProcess);
+		
+		
+		// =======================Test 1b: BQL Query ===========
+		
+		System.debugOut("\n\n");
+		System.debugOut("### " + Engine.currentRule() + "=======================Test 1b: Getting RSU using BQL query ===========");
+
+		System.debugOut("### " + Engine.currentRule() + " Getting RSU using BQL query: " + ersu.RSUNumber);
+		long lStartBQL = System.currentTimeMillis();
+		long lTimeToProcessBQL = 0;
+
+		sWhere = " where cp.RSUNumber=" + ersu.RSUNumber + "";
+		sQuery = "select cp.RSUNumber from /Concepts/cRSU as cp" + sWhere;
+
+		System.debugOut("### " + Engine.ruleName() + " Query: " + sQuery);
+		
+		Object oResultListBQL = Query.Util.executeInDynamicQuerySession(sQuery, null, false);
+		Object[] oRowsBQL = Query.Util.listToArray(oResultListBQL);
+
+		Query.Util.clearList(oResultListBQL);
+		int iNumRowsBQL = oRowsBQL@length;
+		System.debugOut("### " + Engine.ruleName() + " Query returned: " + iNumRowsBQL + " rows");
+		for (int i = 0; i < iNumRowsBQL; i++) {
+			int iRSUNumber = oRowsBQL[i];
+			System.debugOut("### " + Engine.currentRule() + " RSU found: " + iRSUNumber);
+		}
+
+		// return results
+		lTimeToProcessBQL = System.currentTimeMillis() - lStartBQL;
+		System.debugOut("### " + Engine.currentRule() + " Processing time BQL query " + lTimeToProcessBQL);
+		
+		
+		// =======================Test 1c: Compare BQL Queries ===========
+
+		System.debugOut("\n\n");
+		System.debugOut("### " + Engine.currentRule() + "=======================Test 1c: Native vs BQL Query ===========");
+
+		long diff = lTimeToProcessBQL - lTimeToProcess;
+		
+		if (diff > 0) {	
+			System.debugOut("### " + Engine.currentRule() + " Native query is faster than BQL query by " + diff + " millis, where : lTimeToProcessBQL: "+ lTimeToProcessBQL + ", lTimeToProcessNative: " + lTimeToProcess);
+		} else {
+			System.debugOut("### " + Engine.currentRule() + " BQL query is faster than the native query by " + diff + " millis, where : lTimeToProcessBQL: "+ lTimeToProcessBQL + ", lTimeToProcessNative: " + lTimeToProcess);
+		}
+		
+		Event.createEvent("xslt://{{/Events/eGetRSUByNumberCompareBQLTypes}}<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<xsl:stylesheet xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\" version=\"2.0\"><xsl:param name=\"ersu\"/><xsl:template name=\"Function\" match=\"/\"><createEvent><event><xsl:if test=\"$ersu/@extId\"><xsl:attribute name=\"extId\"><xsl:value-of select=\"$ersu/@extId\"/></xsl:attribute></xsl:if><xsl:if test=\"$ersu/@Id\"><xsl:attribute name=\"Id\"><xsl:value-of select=\"$ersu/@Id\"/></xsl:attribute></xsl:if><xsl:if test=\"$ersu/RSUNumber\"><RSUNumber><xsl:value-of select=\"$ersu/RSUNumber\"/></RSUNumber></xsl:if></event></createEvent></xsl:template></xsl:stylesheet>");
+		Event.replyEvent(ersu,evReply);
+	}
+}

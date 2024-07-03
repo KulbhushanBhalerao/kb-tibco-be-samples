@@ -1,4 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?><event:SimpleEvent xmlns:event="http:///com/tibco/cep/designtime/core/model/event" xmlns:xmi="http://www.omg.org/XMI" xmi:version="2.0" folder="/Events/" name="eGetRSUByTimeCreated" description="" GUID="85FBCF56-27C8-D67F-801F-98C5CBB287B6" ownerProjectName="rsu-ignite-sample" superEventPath="" ttlUnits="Seconds" channelURI="/Channels/Incoming" destinationName="getRSUByTimeCreated">
+<?xml version="1.0" encoding="UTF-8"?><event:SimpleEvent xmlns:event="http:///com/tibco/cep/designtime/core/model/event" xmlns:xmi="http://www.omg.org/XMI" xmi:version="2.0" folder="/Events/" name="eGetRSUByTimeCreated" description="" GUID="9CF962B2-105C-8E1D-A2C9-ABD8F2DA3A5E" ownerProjectName="rsu-ignite-sample" superEventPath="" ttlUnits="Seconds" channelURI="/Channels/Incoming" destinationName="getRSUByTimeCreated">
+    <properties name="dateCreated" ownerProjectName="rsu-ignite-sample" type="DateTime" ownerPath="/Events/eGetRSUByTimeCreated"/>
+    <properties name="dateCreatedMillis" ownerProjectName="rsu-ignite-sample" type="long" ownerPath="/Events/eGetRSUByTimeCreated"/>
     <expiryAction folder="/Events/eGetRSUByTimeCreated" name="eGetRSUByTime_expiryAction" ownerProjectName="rsu-ignite-sample" actionText="" conditionText="">
         <symbols>
             <symbolList idName="egetrsubytime" type="/Events/eGetRSUByTimeCreated"/>

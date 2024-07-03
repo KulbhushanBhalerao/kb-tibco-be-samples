@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><event:SimpleEvent xmlns:event="http:///com/tibco/cep/designtime/core/model/event" xmlns:xmi="http://www.omg.org/XMI" xmi:version="2.0" folder="/Events/" name="eGetRSUByNumber" description="" GUID="F814348F-4307-07A2-556D-D0A0EE98147F" ownerProjectName="rsu-ignite-sample" superEventPath="" ttlUnits="Seconds" channelURI="/Channels/Incoming" destinationName="getRSUByNumber">
+<?xml version="1.0" encoding="UTF-8"?><event:SimpleEvent xmlns:event="http:///com/tibco/cep/designtime/core/model/event" xmlns:xmi="http://www.omg.org/XMI" xmi:version="2.0" folder="/Events/" name="eGetRSUByNumber" description="" GUID="21AF16B4-95D9-4851-D8A7-06FE0AAAF637" ownerProjectName="rsu-ignite-sample" superEventPath="" ttlUnits="Seconds" channelURI="/Channels/Incoming" destinationName="getRSUByNumber">
     <properties name="RSUNumber" ownerProjectName="rsu-ignite-sample" type="int" conceptTypePath="/Events/eGetRSUByNumber" ownerPath="/Events/eGetRSUByNumber"/>
     <expiryAction folder="/Events/eGetRSUByNumber" name="eRSU_expiryAction" ownerProjectName="rsu-ignite-sample" actionText="" conditionText="">
         <symbols>

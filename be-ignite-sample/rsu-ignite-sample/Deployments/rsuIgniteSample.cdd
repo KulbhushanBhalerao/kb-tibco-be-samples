@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <cluster xmlns="http://tibco.com/businessevents/configuration/6.3">
     <revision>
-        <version>30</version>
+        <version>37</version>
         <author>kbhalera</author>
-        <date>2024/06/25 16:15:41</date>
+        <date>2024/07/02 17:30:19</date>
         <comment/>
     </revision>
     <name>rsuIgniteSample</name>
@@ -198,7 +198,7 @@
                 <ref>all-rules</ref>
             </rules>
             <destinations>
-                <destination id="getRSUByTimeCreated_DEAB5FF">
+                <destination id="getRSUByTimeCreated_CC143DF">
                     <pre-processor/>
                     <queue-size/>
                     <thread-count/>
@@ -206,7 +206,7 @@
                     <thread-affinity-rule-function/>
                     <uri>/Channels/Incoming/getRSUByTimeCreated</uri>
                 </destination>
-                <destination id="getRSUAll_5E4C61">
+                <destination id="getRSUAll_1B21C1F2">
                     <pre-processor/>
                     <queue-size/>
                     <thread-count/>
@@ -214,13 +214,21 @@
                     <thread-affinity-rule-function/>
                     <uri>/Channels/Incoming/getRSUAll</uri>
                 </destination>
-                <destination id="getRSUByNumber_33A61A74">
+                <destination id="getRSUByNumber_4E7B2CCC">
                     <pre-processor/>
                     <queue-size/>
                     <thread-count/>
                     <threading-model>shared-queue</threading-model>
                     <thread-affinity-rule-function/>
                     <uri>/Channels/Incoming/getRSUByNumber</uri>
+                </destination>
+                <destination id="getRSUByNumberCompareBQLTypes_2E361AD4">
+                    <pre-processor/>
+                    <queue-size/>
+                    <thread-count/>
+                    <threading-model>shared-queue</threading-model>
+                    <thread-affinity-rule-function/>
+                    <uri>/Channels/Incoming/getRSUByNumberCompareBQLTypes</uri>
                 </destination>
             </destinations>
             <startup>
@@ -267,9 +275,7 @@
             <load>
                 <max-active/>
             </load>
-            <property-group>
-                <property name="be.agent.query.console" value="query-class"/>
-            </property-group>
+            <property-group/>
         </query-agent-class>
     </agent-classes>
     <processing-units>
@@ -277,11 +283,6 @@
             <agents>
                 <agent>
                     <ref>inference-class</ref>
-                    <key/>
-                    <priority/>
-                </agent>
-                <agent>
-                    <ref>query-class</ref>
                     <key/>
                     <priority/>
                 </agent>

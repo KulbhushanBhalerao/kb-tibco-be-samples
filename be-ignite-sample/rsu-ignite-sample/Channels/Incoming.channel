@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<channel:Channel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:channel="http:///com/tibco/cep/designtime/core/model/service/channel" xmlns:designtime="http:///com/tibco/cep/designtime/core/model/designtime_ontology.ecore" folder="/Channels/" name="Incoming" description="" GUID="A578061B-F203-8BB6-687A-7AE394DDD42B" ownerProjectName="rsu-ignite-sample">
+<channel:Channel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:channel="http:///com/tibco/cep/designtime/core/model/service/channel" xmlns:designtime="http:///com/tibco/cep/designtime/core/model/designtime_ontology.ecore" folder="/Channels/" name="Incoming" description="" GUID="B6B6A1DB-77B5-D2A5-475F-C9FD15354932" ownerProjectName="rsu-ignite-sample">
   <driver xsi:type="channel:HttpChannelDriverConfig" configMethod="REFERENCE" reference="/SharedResources/HTTPSR.sharedhttp" label="HTTP" channel="/">
-    <destinations name="getRSUAll" description="" GUID="F2C215FA-CC31-47CD-38AF-A6F4D016AA0F" ownerProjectName="rsu-ignite-sample" eventURI="/Events/eGetRSUAll" serializerDeserializerClass="com.tibco.cep.driver.http.serializer.RESTMessageSerializer" driverConfig="//@driver">
+    <destinations name="getRSUAll" description="" GUID="4927344E-F605-D4CD-DFFF-D86411C80A8E" ownerProjectName="rsu-ignite-sample" eventURI="/Events/eGetRSUAll" serializerDeserializerClass="com.tibco.cep.driver.http.serializer.RESTMessageSerializer" driverConfig="//@driver">
       <properties>
         <properties xsi:type="designtime:SimpleProperty" name="be.http.ResponseEvent" value=""/>
         <properties xsi:type="designtime:SimpleProperty" name="be.http.jsonPayload" value="false"/>
@@ -11,7 +11,7 @@
         <properties xsi:type="designtime:SimpleProperty" name="be.http.pageFlowFunction" value=""/>
       </properties>
     </destinations>
-    <destinations name="getRSUByNumber" description="" GUID="58B1D1D5-BD37-1AD1-15DC-26D787B87A7F" ownerProjectName="rsu-ignite-sample" eventURI="/Events/eGetRSUByNumber" serializerDeserializerClass="com.tibco.cep.driver.http.serializer.RESTMessageSerializer" driverConfig="//@driver">
+    <destinations name="getRSUByNumber" description="" GUID="415A4919-9F5F-AD90-9290-A4208C014A92" ownerProjectName="rsu-ignite-sample" eventURI="/Events/eGetRSUByNumber" serializerDeserializerClass="com.tibco.cep.driver.http.serializer.RESTMessageSerializer" driverConfig="//@driver">
       <properties>
         <properties xsi:type="designtime:SimpleProperty" name="be.http.ResponseEvent" value=""/>
         <properties xsi:type="designtime:SimpleProperty" name="be.http.jsonPayload" value="false"/>
@@ -21,7 +21,17 @@
         <properties xsi:type="designtime:SimpleProperty" name="be.http.pageFlowFunction" value=""/>
       </properties>
     </destinations>
-    <destinations name="getRSUByTimeCreated" description="" GUID="CF2E3140-74A1-3484-2BB7-3DAF935E1858" ownerProjectName="rsu-ignite-sample" eventURI="/Events/eGetRSUByTimeCreated" serializerDeserializerClass="com.tibco.cep.driver.http.serializer.RESTMessageSerializer" driverConfig="//@driver">
+    <destinations name="getRSUByTimeCreated" description="" GUID="75BC63C3-1197-27B8-6956-DD0FA56C826C" ownerProjectName="rsu-ignite-sample" eventURI="/Events/eGetRSUByTimeCreated" serializerDeserializerClass="com.tibco.cep.driver.http.serializer.RESTMessageSerializer" driverConfig="//@driver">
+      <properties>
+        <properties xsi:type="designtime:SimpleProperty" name="be.http.ResponseEvent" value=""/>
+        <properties xsi:type="designtime:SimpleProperty" name="be.http.jsonPayload" value="false"/>
+        <properties xsi:type="designtime:SimpleProperty" name="be.http.IncludeEventType" value="ALWAYS"/>
+        <properties xsi:type="designtime:SimpleProperty" name="be.http.type" value="DEFAULT"/>
+        <properties xsi:type="designtime:SimpleProperty" name="be.http.contextPath" value=""/>
+        <properties xsi:type="designtime:SimpleProperty" name="be.http.pageFlowFunction" value=""/>
+      </properties>
+    </destinations>
+    <destinations name="getRSUByNumberCompareBQLTypes" description="" GUID="3FD5813A-A7F3-8758-D509-49176009CD2B" ownerProjectName="rsu-ignite-sample" eventURI="/Events/eGetRSUByNumberCompareBQLTypes" serializerDeserializerClass="com.tibco.cep.driver.http.serializer.RESTMessageSerializer" driverConfig="//@driver">
       <properties>
         <properties xsi:type="designtime:SimpleProperty" name="be.http.ResponseEvent" value=""/>
         <properties xsi:type="designtime:SimpleProperty" name="be.http.jsonPayload" value="false"/>

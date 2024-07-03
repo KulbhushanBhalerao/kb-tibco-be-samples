@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><element:Concept xmlns:element="http:///com/tibco/cep/designtime/core/model/element" xmlns:xmi="http://www.omg.org/XMI" xmi:version="2.0" folder="/Concepts/" name="cRSU" description="" GUID="EAD2AE2E-9423-0A61-7A7F-0501AA58C5B7" ownerProjectName="rsu-ignite-sample" superConceptPath="" autoStartStateMachine="true">
+<?xml version="1.0" encoding="UTF-8"?><element:Concept xmlns:element="http:///com/tibco/cep/designtime/core/model/element" xmlns:xmi="http://www.omg.org/XMI" xmi:version="2.0" folder="/Concepts/" name="cRSU" description="" GUID="885716B4-0D82-B10D-451F-A824018D98F8" ownerProjectName="rsu-ignite-sample" superConceptPath="" autoStartStateMachine="true">
     <extendedProperties/>
     <properties name="RSUNumber" ownerProjectName="rsu-ignite-sample" type="int"/>
     <properties name="dateCreated" ownerProjectName="rsu-ignite-sample" type="DateTime"/>
