@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <cluster xmlns="http://tibco.com/businessevents/configuration/6.3">
     <revision>
-        <version>41</version>
+        <version>42</version>
         <author>kbhalera</author>
-        <date>2024/07/03 16:03:07</date>
+        <date>2024/07/03 17:08:32</date>
         <comment/>
     </revision>
     <name>rsuIgniteSample</name>
@@ -286,7 +286,7 @@
             </agents>
             <logs>logConfig</logs>
             <hot-deploy>false</hot-deploy>
-            <cache-storage-enabled>false</cache-storage-enabled>
+            <cache-storage-enabled>true</cache-storage-enabled>
             <db-concepts>false</db-concepts>
             <property-group/>
         </processing-unit>

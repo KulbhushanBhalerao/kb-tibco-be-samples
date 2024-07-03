@@ -16,19 +16,25 @@ rule Rules.rCreateRSU {
 	}
 	then {
 			
-			try{		
-			DateTime dtime = DateTime.now();
-			long dtime_millis = DateTime.getTimeInMillis(dtime);
-			Concepts.cRSU.cRSU(String.valueOfInt(creatersu.RSUNumber), creatersu.RSUNumber, dtime , dtime_millis, dtime, dtime_millis, creatersu.RSUType);
+			try{	
+				if(creatersu.RSUNumber != 0 && creatersu.RSUType != null)
+						{	
+							DateTime dtime = DateTime.now();
+							String dtFormat = "yyyy-MM-dd'T'HH:mm:ss.ss'Z'";
+							long dtime_millis = DateTime.getTimeInMillis(dtime);
+							Concepts.cRSU.cRSU(String.valueOfInt(creatersu.RSUNumber), creatersu.RSUNumber, dtime , dtime_millis, dtime, dtime_millis, creatersu.RSUType);
+							
+							System.debugOut("### " + Engine.currentRule() + " Created RSU: " + creatersu.RSUNumber +"/" + creatersu.RSUType + " at dtime: " + DateTime.format(dtime,dtFormat) + " dtime_millis: " + dtime_millis);
+						}else{
+							System.debugOut("### " + Engine.currentRule() + " Not able to create RSU : " + creatersu.RSUNumber +"/"+ creatersu.RSUType);
+						  }
+			     } catch (Exception e)
+							{
+								System.debugOut("### " + Engine.currentRule() + " Failed creating RSU: " + creatersu.RSUNumber + " Error Message: "+ e@message);
+							}
+						
+						Event.replyEvent(creatersu,creatersu);
+					
 			
-			System.debugOut("### " + Engine.currentRule() + " Created RSU: " + creatersu.RSUNumber + " at dtime_millis " + dtime_millis);
-			}
-			catch (Exception e)
-			{
-				System.debugOut("### " + Engine.currentRule() + " Failed creating RSU: " + creatersu.RSUNumber + " Error Message: "+ e@message);
-			}
-		
-			Event.replyEvent(creatersu,creatersu);
-		
 		}
 }

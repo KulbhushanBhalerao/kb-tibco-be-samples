@@ -9,7 +9,13 @@ create
 createRSU: 
 Input: RSUNumber, RSUType
 Uses: Native query
-curl -v -X GET http://localhost:9292/Channels/Incoming/createRSU?RSUNumber=3001%RSUType=SLT
+curl -v -X GET http://localhost:9292/Channels/Incoming/createRSU?RSUNumber=3001&RSUType=SLT
+
+curl -v -X GET http://localhost:9292/Channels/Incoming/createRSU?RSUNumber=99999%26RSUType=SLT
+
+curl -v -X POST http://localhost:9292/Channels/Incoming/createRSU -F RSUNumber=99991 -F RSUType=SLT
+
+curl -v -X POST http://localhost:9292/Channels/Incoming/createRSU --form 'RSUNumber=99991' --form 'RSUType=SLT'
 
 
 Get calls using curl
@@ -19,18 +25,18 @@ get
 getRSUByNumber: 
 Input: RSUNumber
 Uses: Native query
-curl -v -X GET http://localhost:9292/Channels/Incoming/getRSUByNumber?RSUNumber=3001
+curl -v -X GET http://localhost:9292/Channels/Incoming/getRSUByNumber?RSUNumber=30001
 
 getRSUByType: 
 Input: RSUType
 Uses: Native query
-curl -v -X GET http://localhost:9292/Channels/Incoming/getRSUByNumber?RSUType=ICNG
+curl -v -X GET http://localhost:9292/Channels/Incoming/getRSUByType?RSUType=ICNG
 
 getRSUByNumberCompareBQLTypes: 
 Input: RSUNumber
 Uses: Native query and non-native query
 Outcome: In logs you see the difference in time to fetch the same record
-curl -v -X GET http://localhost:9292/Channels/Incoming/getRSUByNumberCompareBQLTypes?RSUNumber=3001
+curl -v -X GET http://localhost:9292/Channels/Incoming/getRSUByNumberCompareBQLTypes?RSUNumber=30001
 
 getRSUByTimeCreated: 
 Input: 2 optional fields 

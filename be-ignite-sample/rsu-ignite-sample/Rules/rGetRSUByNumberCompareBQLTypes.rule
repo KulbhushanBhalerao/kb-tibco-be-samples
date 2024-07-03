@@ -94,7 +94,7 @@ rule Rules.rGetRSUByNumberCompareBQLTypes {
 			System.debugOut("### " + Engine.currentRule() + " BQL query is faster than the native query by " + diff + " millis, where : lTimeToProcessBQL: "+ lTimeToProcessBQL + ", lTimeToProcessNative: " + lTimeToProcess);
 		}
 		
-		evReply = Event.createEvent("xslt://{{/Events/eGetRSUByNumberCompareBQLTypes}}<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<xsl:stylesheet xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\" version=\"2.0\"><xsl:param name=\"ersu\"/><xsl:template name=\"Function\" match=\"/\"><createEvent><event><xsl:if test=\"$ersu/@extId\"><xsl:attribute name=\"extId\"><xsl:value-of select=\"$ersu/@extId\"/></xsl:attribute></xsl:if><xsl:if test=\"$ersu/@Id\"><xsl:attribute name=\"Id\"><xsl:value-of select=\"$ersu/@Id\"/></xsl:attribute></xsl:if><xsl:if test=\"$ersu/RSUNumber\"><RSUNumber><xsl:value-of select=\"$ersu/RSUNumber\"/></RSUNumber></xsl:if></event></createEvent></xsl:template></xsl:stylesheet>");
-		Event.replyEvent(ersu,evReply);
+		//evReply = Event.createEvent("xslt://{{/Events/eGetRSUByNumberCompareBQLTypes}}<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<xsl:stylesheet xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\" version=\"2.0\"><xsl:param name=\"ersu\"/><xsl:template name=\"Function\" match=\"/\"><createEvent><event><xsl:if test=\"$ersu/@extId\"><xsl:attribute name=\"extId\"><xsl:value-of select=\"$ersu/@extId\"/></xsl:attribute></xsl:if><xsl:if test=\"$ersu/@Id\"><xsl:attribute name=\"Id\"><xsl:value-of select=\"$ersu/@Id\"/></xsl:attribute></xsl:if><xsl:if test=\"$ersu/RSUNumber\"><RSUNumber><xsl:value-of select=\"$ersu/RSUNumber\"/></RSUNumber></xsl:if></event></createEvent></xsl:template></xsl:stylesheet>");
+		Event.replyEvent(ersu,ersu);
 	}
 }

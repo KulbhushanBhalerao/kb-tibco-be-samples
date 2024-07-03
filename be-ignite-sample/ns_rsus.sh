@@ -19,5 +19,5 @@ do
   elif [[ $it == 20* || $it == 22* || $it == 25* ]]; then
     typ="FLIRT"
   fi
-  echo "curl -v -X GET http://localhost:9292/Channels/Incoming/createRSU?RSUNumber=${it}%RSUType=${typ}"
+    curl -v -X POST http://localhost:9292/Channels/Incoming/createRSU?RSUNumber=${it}&RSUType=${typ}
 done

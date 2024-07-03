@@ -16,38 +16,43 @@ rule Rules.rGetRSUByType {
 	}
 	then {
 		
-		Events.eGetRSUByType evReply = null;
-		String dtFormat = "yyyy-MM-dd'T'HH:mm:ss.ss'Z'"; 
-		System.debugOut("\n\n");
-		System.debugOut("### " + Engine.currentRule() + "=======================Test 1a: Getting RSU by Type using BQL native query ===========");
-		System.debugOut("### " + Engine.currentRule() + " Getting RSU by Type using BQL native query: " + ersu.RSUNumber);
-		long lStart = System.currentTimeMillis();
-		long lTimeToProcess = 0;
-
-		String sWhere = " where cp.RSUType='" + ersu.RSUType + "'";
-		String sQuery = "native-query: select _EXTID from be_gen_concepts_cRSU as cp" + sWhere;
-
-		System.debugOut("### " + Engine.ruleName() + " Query: " + sQuery);
-
-		Object oResultList = Query.Util.executeInDynamicQuerySession(sQuery, null, false);
-		Object[] oRows = Query.Util.listToArray(oResultList);
-
-		Query.Util.clearList(oResultList);
-		int iNumRows = oRows@length;
-
-		Concepts.cRSU cp = null;
-		for (int i = 0; i < iNumRows; i++) {
-			String sExtID = oRows[i];
-			cp = Instance.getByExtIdByUri(sExtID, "/Concepts/cRSU");
-			System.debugOut("### " + Engine.currentRule() + " RSU found: " + cp.RSUNumber +"-"+cp.RSUType + " date created: " + DateTime.format(cp.dateCreated,dtFormat) + ", in millis: " + cp.dateCreatedMillis);
+	
+			//Events.eGetRSUByType evReply = null;
+			String dtFormat = "yyyy-MM-dd'T'HH:mm:ss.ss'Z'"; 
+			System.debugOut("\n\n");
+			System.debugOut("### " + Engine.currentRule() + "=======================Test 1a: Getting RSU by Type using BQL native query ===========");
+			System.debugOut("### " + Engine.currentRule() + " Getting RSU by Type using BQL native query: " + ersu.RSUType);
+			long lStart = System.currentTimeMillis();
+			long lTimeToProcess = 0;
+	
+			String sWhere = " where cp.RSUType='" + ersu.RSUType + "'";
+			String sQuery = "native-query: select _EXTID from be_gen_concepts_cRSU as cp" + sWhere;
+			
+			System.debugOut("### " + Engine.ruleName() + " Query: " + sQuery);
+	
+			Object oResultList = Query.Util.executeInDynamicQuerySession(sQuery, null, false);
+			Object[] oRows = Query.Util.listToArray(oResultList);
+	
+			Query.Util.clearList(oResultList);
+			int iNumRows = oRows@length;
+			
+			System.debugOut("### " + Engine.ruleName() + " Number of records found: " + iNumRows);
+	
+			Concepts.cRSU cp = null;
+			for (int i = 0; i < iNumRows; i++) {
+				String sExtID = oRows[i];
+				cp = Instance.getByExtIdByUri(sExtID, "/Concepts/cRSU");
+				System.debugOut("### " + Engine.currentRule() + " RSU found: " + cp.RSUNumber +"-"+cp.RSUType + " date created: " + DateTime.format(cp.dateCreated,dtFormat) + ", in millis: " + cp.dateCreatedMillis);
+			}
+	
+			// return results
+			lTimeToProcess = System.currentTimeMillis() - lStart;
+			System.debugOut("### " + Engine.currentRule() + " Processing time native query " + lTimeToProcess);
+			
+			//evReply = Event.createEvent("xslt://{{/Events/eRSUReply}}<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<xsl:stylesheet xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\" version=\"2.0\"><xsl:template name=\"Function\" match=\"/\"><createEvent><event/></createEvent></xsl:template></xsl:stylesheet>");
+			Event.replyEvent(ersu,ersu);
 		}
-
-		// return results
-		lTimeToProcess = System.currentTimeMillis() - lStart;
-		System.debugOut("### " + Engine.currentRule() + " Processing time native query " + lTimeToProcess);
 		
-		evReply = Event.createEvent("xslt://{{/Events/eRSUReply}}<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<xsl:stylesheet xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\" version=\"2.0\"><xsl:param name=\"cp\"/><xsl:template name=\"Function\" match=\"/\"><createEvent><event><xsl:copy-of select=\"$cp/ancestor-or-self::*/namespace::node()\"/><xsl:copy-of select=\"$cp/@*\"/><xsl:copy-of select=\"$cp/node()\"/></event></createEvent></xsl:template></xsl:stylesheet>");
-		Event.replyEvent(ersu,evReply);
 		
-	}
+	
 }

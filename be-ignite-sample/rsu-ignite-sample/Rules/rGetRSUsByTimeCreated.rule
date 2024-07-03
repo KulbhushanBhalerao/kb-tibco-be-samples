@@ -31,7 +31,7 @@ rule Rules.rGetRSUsByTimeCreated {
 			System.debugOut("### " + Engine.currentRule() + "======================= Test 1a: Query using Datetime ===========");
 			System.debugOut("### " + Engine.currentRule() + " Getting RSU after datetime " + DateTime.format(evGetRSUByTC.dateCreated,dtFormat));
 			
-			sWhere=" where cp.dateCreated >= " + evGetRSUByTC.dateCreated;
+			sWhere=" where cp.dateCreated > " + evGetRSUByTC.dateCreated;
 			sQuery = sQuery + sWhere;
 			System.debugOut("### " + Engine.ruleName() + "Query: " + sQuery);
 			
@@ -58,7 +58,7 @@ rule Rules.rGetRSUsByTimeCreated {
 			System.debugOut("### " + Engine.currentRule() + "======================= Test 1b: Query using Datetime in Millis ===========");
 			System.debugOut("### " + Engine.currentRule() + " Getting RSU after datetime in millis " + evGetRSUByTC.dateCreatedMillis);
 			
-			sWhere=" where /#DateTime/getTimeInMillis(cp.dateCreatedMillis)>=" + String.valueOfLong(evGetRSUByTC.dateCreatedMillis);
+			sWhere=" where /#DateTime/getTimeInMillis(cp.dateCreatedMillis)>" + String.valueOfLong(evGetRSUByTC.dateCreatedMillis);
 			sQuery = sQuery + sWhere;
 			System.debugOut("### " + Engine.ruleName() + "Query: " + sQuery);
 			
