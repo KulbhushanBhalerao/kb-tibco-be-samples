@@ -9,16 +9,8 @@ create
 createRSU: 
 Input: RSUNumber, RSUType
 Uses: Native query
-curl -v -X GET http://localhost:9292/Channels/Incoming/createRSU?RSUNumber=3001&RSUType=SLT
 
-curl -v -X GET http://localhost:9292/Channels/Incoming/createRSU?RSUNumber=99999%26RSUType=SLT
-
-curl -v -X POST http://localhost:9292/Channels/Incoming/createRSU -F RSUNumber=99991 -F RSUType=SLT
-
-curl -v -X POST http://localhost:9292/Channels/Incoming/createRSU --form 'RSUNumber=99991' --form 'RSUType=SLT'
-
-
-Get calls using curl
+curl -v -X GET --url "http://localhost:9292/Channels/Incoming/createRSU?RSUNumber=99999&RSUType=SLT"
 
 get
 
