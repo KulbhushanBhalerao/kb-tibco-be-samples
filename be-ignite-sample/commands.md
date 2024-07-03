@@ -4,6 +4,14 @@ rsu-ignite-sample:
 **Sample triggers: **
 Note: During startup BE engine creates 10 sample concepts in cache. 
 
+create
+
+createRSU: 
+Input: RSUNumber, RSUType
+Uses: Native query
+curl -v -X GET http://localhost:9292/Channels/Incoming/createRSU?RSUNumber=3001%RSUType=SLT
+
+
 Get calls using curl
 
 get
@@ -12,6 +20,11 @@ getRSUByNumber:
 Input: RSUNumber
 Uses: Native query
 curl -v -X GET http://localhost:9292/Channels/Incoming/getRSUByNumber?RSUNumber=3001
+
+getRSUByType: 
+Input: RSUType
+Uses: Native query
+curl -v -X GET http://localhost:9292/Channels/Incoming/getRSUByNumber?RSUType=ICNG
 
 getRSUByNumberCompareBQLTypes: 
 Input: RSUNumber
@@ -26,7 +39,9 @@ Input: 2 optional fields
        If both are not null it will try both queries with datetime and datetime millis and show results. 
 Uses: Native query
 Date: 1719928293231
-curl -v -X GET http://localhost:9292/Channels/Incoming/getRSUByTimeCreated?dateCreatedMillis=1719928293231
+curl -v -X GET http://localhost:9292/Channels/Incoming/getRSUByTimeCreated?dateCreatedMillis=1720010770966
+curl -v -X GET http://localhost:9292/Channels/Incoming/getRSUByTimeCreated?dateCreated=2024-07-03T14:46:10.10Z
+
 
 **Enbale BQL Console: **
 To enable BQL Console refer: 

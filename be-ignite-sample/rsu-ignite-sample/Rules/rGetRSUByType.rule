@@ -1,35 +1,30 @@
 /**
- * @description Creates one RSU on request
+ * @description 
  * @author kb-grey-mac.home
  */
-rule Rules.rGetRSUByNumber {
+rule Rules.rGetRSUByType {
 	attribute {
 		priority = 5;
 		forwardChain = true;
 	}
 	declare {
-		Events.eGetRSUByNumber ersu;
+		
+		Events.eGetRSUByType ersu;
 	}
 	when {
-
+		
 	}
 	then {
 		
-		Events.eRSUReply evReply = null;
+		Events.eGetRSUByType evReply = null;
 		String dtFormat = "yyyy-MM-dd'T'HH:mm:ss.ss'Z'"; 
 		System.debugOut("\n\n");
-		System.debugOut("### " + Engine.currentRule() + "=======================Test 1a: Getting RSU using BQL native query ===========");
-		System.debugOut("### " + Engine.currentRule() + " Getting RSU using BQL native query: " + ersu.RSUNumber);
+		System.debugOut("### " + Engine.currentRule() + "=======================Test 1a: Getting RSU by Type using BQL native query ===========");
+		System.debugOut("### " + Engine.currentRule() + " Getting RSU by Type using BQL native query: " + ersu.RSUNumber);
 		long lStart = System.currentTimeMillis();
 		long lTimeToProcess = 0;
 
-		// =======================Test 1a: Native Query ===========
-		// Native Query (faster but will not work with dateTime values)
-		//   - in query you can also select all required columns
-		//     -> not required to load concept with extID later
-		// ======================================================
-
-		String sWhere = " where cp.RSUNumber='" + ersu.RSUNumber + "'";
+		String sWhere = " where cp.RSUType='" + ersu.RSUType + "'";
 		String sQuery = "native-query: select _EXTID from be_gen_concepts_cRSU as cp" + sWhere;
 
 		System.debugOut("### " + Engine.ruleName() + " Query: " + sQuery);
@@ -44,7 +39,7 @@ rule Rules.rGetRSUByNumber {
 		for (int i = 0; i < iNumRows; i++) {
 			String sExtID = oRows[i];
 			cp = Instance.getByExtIdByUri(sExtID, "/Concepts/cRSU");
-			System.debugOut("### " + Engine.currentRule() + " RSU found: " + cp.RSUNumber + " date created: " + DateTime.format(cp.dateCreated,dtFormat) + ", in millis: " + cp.dateCreatedMillis);
+			System.debugOut("### " + Engine.currentRule() + " RSU found: " + cp.RSUNumber +"-"+cp.RSUType + " date created: " + DateTime.format(cp.dateCreated,dtFormat) + ", in millis: " + cp.dateCreatedMillis);
 		}
 
 		// return results

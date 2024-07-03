@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <cluster xmlns="http://tibco.com/businessevents/configuration/6.3">
     <revision>
-        <version>37</version>
+        <version>41</version>
         <author>kbhalera</author>
-        <date>2024/07/02 17:30:19</date>
+        <date>2024/07/03 16:03:07</date>
         <comment/>
     </revision>
     <name>rsuIgniteSample</name>
@@ -198,7 +198,7 @@
                 <ref>all-rules</ref>
             </rules>
             <destinations>
-                <destination id="getRSUByTimeCreated_CC143DF">
+                <destination id="getRSUByTimeCreated_2A1D312C">
                     <pre-processor/>
                     <queue-size/>
                     <thread-count/>
@@ -206,7 +206,23 @@
                     <thread-affinity-rule-function/>
                     <uri>/Channels/Incoming/getRSUByTimeCreated</uri>
                 </destination>
-                <destination id="getRSUAll_1B21C1F2">
+                <destination id="createRSU_356E285A">
+                    <pre-processor/>
+                    <queue-size/>
+                    <thread-count/>
+                    <threading-model>shared-queue</threading-model>
+                    <thread-affinity-rule-function/>
+                    <uri>/Channels/Incoming/createRSU</uri>
+                </destination>
+                <destination id="getRSUByType_2270EF34">
+                    <pre-processor/>
+                    <queue-size/>
+                    <thread-count/>
+                    <threading-model>shared-queue</threading-model>
+                    <thread-affinity-rule-function/>
+                    <uri>/Channels/Incoming/getRSUByType</uri>
+                </destination>
+                <destination id="getRSUAll_1B29EDF6">
                     <pre-processor/>
                     <queue-size/>
                     <thread-count/>
@@ -214,7 +230,7 @@
                     <thread-affinity-rule-function/>
                     <uri>/Channels/Incoming/getRSUAll</uri>
                 </destination>
-                <destination id="getRSUByNumber_4E7B2CCC">
+                <destination id="getRSUByNumber_1800857D">
                     <pre-processor/>
                     <queue-size/>
                     <thread-count/>
@@ -222,7 +238,7 @@
                     <thread-affinity-rule-function/>
                     <uri>/Channels/Incoming/getRSUByNumber</uri>
                 </destination>
-                <destination id="getRSUByNumberCompareBQLTypes_2E361AD4">
+                <destination id="getRSUByNumberCompareBQLTypes_6487A9AA">
                     <pre-processor/>
                     <queue-size/>
                     <thread-count/>
@@ -258,25 +274,6 @@
         <cache-agent-class id="cache-class">
             <property-group/>
         </cache-agent-class>
-        <query-agent-class id="query-class">
-            <destinations/>
-            <startup/>
-            <shutdown/>
-            <local-cache>
-                <eviction>
-                    <max-size>1024</max-size>
-                    <max-time>900</max-time>
-                </eviction>
-            </local-cache>
-            <shared-queue>
-                <size>1024</size>
-                <workers>10</workers>
-            </shared-queue>
-            <load>
-                <max-active/>
-            </load>
-            <property-group/>
-        </query-agent-class>
     </agent-classes>
     <processing-units>
         <processing-unit id="default">

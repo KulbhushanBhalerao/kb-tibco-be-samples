@@ -41,6 +41,26 @@
         <properties xsi:type="designtime:SimpleProperty" name="be.http.pageFlowFunction" value=""/>
       </properties>
     </destinations>
+    <destinations name="createRSU" description="" GUID="AA8C5F63-F934-4836-54AC-F22C26D252A1" ownerProjectName="rsu-ignite-sample" eventURI="/Events/createRSU" serializerDeserializerClass="com.tibco.cep.driver.http.serializer.RESTMessageSerializer" driverConfig="//@driver">
+      <properties>
+        <properties xsi:type="designtime:SimpleProperty" name="be.http.ResponseEvent" value=""/>
+        <properties xsi:type="designtime:SimpleProperty" name="be.http.jsonPayload" value="false"/>
+        <properties xsi:type="designtime:SimpleProperty" name="be.http.IncludeEventType" value="ALWAYS"/>
+        <properties xsi:type="designtime:SimpleProperty" name="be.http.type" value="DEFAULT"/>
+        <properties xsi:type="designtime:SimpleProperty" name="be.http.contextPath" value=""/>
+        <properties xsi:type="designtime:SimpleProperty" name="be.http.pageFlowFunction" value=""/>
+      </properties>
+    </destinations>
+    <destinations name="getRSUByType" description="" GUID="D16D3CDA-936F-C51C-8342-511587EBD769" ownerProjectName="rsu-ignite-sample" eventURI="/Events/eGetRSUByType" serializerDeserializerClass="com.tibco.cep.driver.http.serializer.RESTMessageSerializer" driverConfig="//@driver">
+      <properties>
+        <properties xsi:type="designtime:SimpleProperty" name="be.http.ResponseEvent" value=""/>
+        <properties xsi:type="designtime:SimpleProperty" name="be.http.jsonPayload" value="false"/>
+        <properties xsi:type="designtime:SimpleProperty" name="be.http.IncludeEventType" value="ALWAYS"/>
+        <properties xsi:type="designtime:SimpleProperty" name="be.http.type" value="DEFAULT"/>
+        <properties xsi:type="designtime:SimpleProperty" name="be.http.contextPath" value=""/>
+        <properties xsi:type="designtime:SimpleProperty" name="be.http.pageFlowFunction" value=""/>
+      </properties>
+    </destinations>
     <extendedConfiguration>
       <properties name="serverType" value="TOMCAT"/>
     </extendedConfiguration>

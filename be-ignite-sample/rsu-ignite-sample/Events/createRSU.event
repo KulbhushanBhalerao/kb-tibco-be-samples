@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<event:SimpleEvent xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:event="http:///com/tibco/cep/designtime/core/model/event" folder="/Events/" name="createRSU" description="" GUID="BD09938F-F192-6B87-9098-D66F1957F7AB" ownerProjectName="rsu-ignite-sample" superEventPath="" ttlUnits="Seconds" channelURI="/Channels/Incoming" destinationName="createRSU">
+  <properties name="RSUNumber" ownerProjectName="rsu-ignite-sample" type="int"/>
+  <properties name="RSUType" ownerProjectName="rsu-ignite-sample"/>
+  <expiryAction name="createRSU_expiryAction" ownerProjectName="rsu-ignite-sample" actionText="" conditionText="">
+    <symbols>
+      <symbolList idName="creatersu" type="/Events/createRSU"/>
+    </symbols>
+  </expiryAction>
+</event:SimpleEvent>

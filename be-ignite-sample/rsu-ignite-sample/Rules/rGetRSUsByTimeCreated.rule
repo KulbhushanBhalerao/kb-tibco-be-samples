@@ -32,6 +32,7 @@ rule Rules.rGetRSUsByTimeCreated {
 			System.debugOut("### " + Engine.currentRule() + " Getting RSU after datetime " + DateTime.format(evGetRSUByTC.dateCreated,dtFormat));
 			
 			sWhere=" where cp.dateCreated >= " + evGetRSUByTC.dateCreated;
+			sQuery = sQuery + sWhere;
 			System.debugOut("### " + Engine.ruleName() + "Query: " + sQuery);
 			
 			Object oResultList = Query.Util.executeInDynamicQuerySession(sQuery, null, false);
@@ -58,6 +59,7 @@ rule Rules.rGetRSUsByTimeCreated {
 			System.debugOut("### " + Engine.currentRule() + " Getting RSU after datetime in millis " + evGetRSUByTC.dateCreatedMillis);
 			
 			sWhere=" where /#DateTime/getTimeInMillis(cp.dateCreatedMillis)>=" + String.valueOfLong(evGetRSUByTC.dateCreatedMillis);
+			sQuery = sQuery + sWhere;
 			System.debugOut("### " + Engine.ruleName() + "Query: " + sQuery);
 			
 			Object oResultList = Query.Util.executeInDynamicQuerySession(sQuery, null, false);
@@ -80,5 +82,11 @@ rule Rules.rGetRSUsByTimeCreated {
 		lTimeToProcess = System.currentTimeMillis() - lStart;
 		System.debugOut("### " + Engine.currentRule() + " Processing time query " + lTimeToProcess);
 		
+		Event.replyEvent(evGetRSUByTC,evGetRSUByTC);
+		
 	}
 }
+
+//Calling: 
+//curl -v -X GET http://localhost:9292/Channels/Incoming/getRSUByTimeCreated?dateCreatedMillis=1720010770966
+//curl -v -X GET http://localhost:9292/Channels/Incoming/getRSUByTimeCreated?dateCreated=2024-07-03T14:46:10.10Z

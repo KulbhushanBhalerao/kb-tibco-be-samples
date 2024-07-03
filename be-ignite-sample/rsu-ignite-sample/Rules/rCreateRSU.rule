@@ -1,0 +1,34 @@
+/**
+ * @description 
+ * @author kb-grey-mac.home
+ */
+rule Rules.rCreateRSU {
+	attribute {
+		priority = 5;
+		forwardChain = true;
+	}
+	declare {
+		
+		Events.createRSU creatersu;
+	}
+	when {
+		
+	}
+	then {
+			
+			try{		
+			DateTime dtime = DateTime.now();
+			long dtime_millis = DateTime.getTimeInMillis(dtime);
+			Concepts.cRSU.cRSU(String.valueOfInt(creatersu.RSUNumber), creatersu.RSUNumber, dtime , dtime_millis, dtime, dtime_millis, creatersu.RSUType);
+			
+			System.debugOut("### " + Engine.currentRule() + " Created RSU: " + creatersu.RSUNumber + " at dtime_millis " + dtime_millis);
+			}
+			catch (Exception e)
+			{
+				System.debugOut("### " + Engine.currentRule() + " Failed creating RSU: " + creatersu.RSUNumber + " Error Message: "+ e@message);
+			}
+		
+			Event.replyEvent(creatersu,creatersu);
+		
+		}
+}
