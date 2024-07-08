@@ -15,7 +15,6 @@ rule Rules.rGetRSUByType {
 		
 	}
 	then {
-		
 	
 			//Events.eGetRSUByType evReply = null;
 			String dtFormat = "yyyy-MM-dd'T'HH:mm:ss.ss'Z'"; 

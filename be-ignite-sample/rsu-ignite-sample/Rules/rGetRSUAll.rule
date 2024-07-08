@@ -1,0 +1,47 @@
+/**
+ * @description 
+ * @author 31-149-14-42.biz.kpn.net
+ */
+rule Rules.rGetRSUAll {
+	attribute {
+		priority = 5;
+		forwardChain = true;
+	}
+	declare {
+		Events.eGetRSUAll ersu;
+	}
+	when {
+		
+	}
+	then {
+		String dtFormat = "yyyy-MM-dd'T'HH:mm:ss.ss'Z'"; 
+		System.debugOut("\n\n");
+		System.debugOut("### " + Engine.currentRule() + "======================= Getting RSU using BQL native query ===========");
+		long lStart = System.currentTimeMillis();
+		long lTimeToProcess = 0;
+
+		String sWhere = "";
+		String sQuery = "native-query: select _EXTID from be_gen_concepts_cRSU as cp" + sWhere;
+
+		System.debugOut("### " + Engine.ruleName() + " Query: " + sQuery);
+
+		Object oResultList = Query.Util.executeInDynamicQuerySession(sQuery, null, false);
+		Object[] oRows = Query.Util.listToArray(oResultList);
+
+		Query.Util.clearList(oResultList);
+		int iNumRows = oRows@length;
+
+		Concepts.cRSU cp = null;
+		for (int i = 0; i < iNumRows; i++) {
+			String sExtID = oRows[i];
+			cp = Instance.getByExtIdByUri(sExtID, "/Concepts/cRSU");
+			System.debugOut("### " + Engine.currentRule() + " RSU found: " + cp.RSUNumber + "/" + cp.RSUType +" date created: " + DateTime.format(cp.dateCreated,dtFormat) + ", in millis: " + cp.dateCreatedMillis);
+		}
+
+		// return results
+		lTimeToProcess = System.currentTimeMillis() - lStart;
+		System.debugOut("### " + Engine.currentRule() + " Processing time native query " + lTimeToProcess);
+		
+		Event.replyEvent(ersu,ersu);
+	}
+}
