@@ -1,10 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<event:SimpleEvent xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:event="http:///com/tibco/cep/designtime/core/model/event" folder="/Events/" name="eGetRSUByType" description="Get all the RSUs of given typ" GUID="AB3EE1E9-CE4D-A531-FF14-B8B0C6E8B4F4" ownerProjectName="rsu-ignite-sample" superEventPath="" ttlUnits="Seconds" channelURI="/Channels/Incoming" destinationName="getRSUByType">
-  <properties name="RSUNumber" ownerProjectName="rsu-ignite-sample" type="int"/>
-  <properties name="RSUType" ownerProjectName="rsu-ignite-sample"/>
-  <expiryAction name="eGetRSUByType_expiryAction" ownerProjectName="rsu-ignite-sample" actionText="" conditionText="">
-    <symbols>
-      <symbolList idName="egetrsubytype" type="/Events/eGetRSUByType"/>
-    </symbols>
-  </expiryAction>
+<?xml version="1.0" encoding="UTF-8"?><event:SimpleEvent xmlns:event="http:///com/tibco/cep/designtime/core/model/event" xmlns:xmi="http://www.omg.org/XMI" xmi:version="2.0" folder="/Events/" name="eGetRSUByType" description="Get all the RSUs of given typ" GUID="AB3EE1E9-CE4D-A531-FF14-B8B0C6E8B4F4" ownerProjectName="rsu-ignite-sample" superEventPath="" ttlUnits="Seconds" channelURI="/Channels/Incoming" destinationName="getRSUByType">
+    <properties name="RSUNumber" ownerProjectName="rsu-ignite-sample" type="int" ownerPath="/Events/eGetRSUByType"/>
+    <properties name="RSUType" ownerProjectName="rsu-ignite-sample" ownerPath="/Events/eGetRSUByType"/>
+    <expiryAction name="eGetRSUByType_expiryAction" ownerProjectName="rsu-ignite-sample" actionText="" conditionText="">
+        <symbols>
+            <symbolList idName="egetrsubytype" type="/Events/eGetRSUByType"/>
+        </symbols>
+    </expiryAction>
 </event:SimpleEvent>

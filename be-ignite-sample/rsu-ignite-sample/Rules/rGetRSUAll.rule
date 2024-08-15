@@ -14,7 +14,7 @@ rule Rules.rGetRSUAll {
 		
 	}
 	then {
-		String dtFormat = "yyyy-MM-dd'T'HH:mm:ss.ss'Z'"; 
+		String dtFormat = "yyyy-MM-dd'T'HH:mm:ss.sss'Z'"; 
 		System.debugOut("\n\n");
 		System.debugOut("### " + Engine.currentRule() + "======================= Getting RSU using BQL native query ===========");
 		long lStart = System.currentTimeMillis();

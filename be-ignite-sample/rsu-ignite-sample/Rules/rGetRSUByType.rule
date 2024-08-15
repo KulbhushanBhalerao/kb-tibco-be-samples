@@ -17,7 +17,7 @@ rule Rules.rGetRSUByType {
 	then {
 	
 			//Events.eGetRSUByType evReply = null;
-			String dtFormat = "yyyy-MM-dd'T'HH:mm:ss.ss'Z'"; 
+			String dtFormat = "yyyy-MM-dd'T'HH:mm:ss.sss'Z'"; 
 			System.debugOut("\n\n");
 			System.debugOut("### " + Engine.currentRule() + "=======================Test 1a: Getting RSU by Type using BQL native query ===========");
 			System.debugOut("### " + Engine.currentRule() + " Getting RSU by Type using BQL native query: " + ersu.RSUType);

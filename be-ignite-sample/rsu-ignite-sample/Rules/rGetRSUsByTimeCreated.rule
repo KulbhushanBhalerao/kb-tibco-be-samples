@@ -18,11 +18,11 @@ rule Rules.rGetRSUsByTimeCreated {
 		
 		Events.eGetRSUByTimeCreated evReply = null;
 		
-		String dtFormat = "yyyy-MM-dd'T'HH:mm:ss.ss'Z'"; 
+		String dtFormat = "yyyy-MM-dd'T'HH:mm:ss.sss'Z'"; 
 		long lStart = System.currentTimeMillis();
 		long lTimeToProcess = 0;
 		String sWhere = "";
-		String sQuery = "native-query: select _EXTID from be_gen_concepts_cRSU cp" + sWhere;
+		String sQuery = "native-query: select _EXTID from be_gen_concepts_cRSU cp " + sWhere;
 		
 		//TODO For now lets not test this.
 		if(evGetRSUByTC.dateCreated!=null)
@@ -31,19 +31,53 @@ rule Rules.rGetRSUsByTimeCreated {
 			System.debugOut("### " + Engine.currentRule() + "======================= Test 1a: Query using Datetime ===========");
 			System.debugOut("### " + Engine.currentRule() + " Getting RSU after datetime " + DateTime.format(evGetRSUByTC.dateCreated,dtFormat));
 			
-			sWhere=" where cp.dateCreated > " + evGetRSUByTC.dateCreated;
-			sQuery = sQuery + sWhere;
-			System.debugOut("### " + Engine.ruleName() + "Query: " + sQuery);
+			//---Query formation
+			//Try: Didnt work
+			//sWhere=" where cp.dateCreated>'" + DateTime.format(evGetRSUByTC.dateCreated,dtFormat) + "'";
 			
-			Object oResultList = Query.Util.executeInDynamicQuerySession(sQuery, null, false);
+			//Try: without Z in the time format - didnt work. 
+			//String dtFormatForQuery = "yyyy-MM-dd'T'HH:mm:ss.sss";
+			//sWhere=" where cp.dateCreated>'" + DateTime.format(evGetRSUByTC.dateCreated,dtFormatForQuery) + "'";
+			
+			//Try: Convert to db specific format Ref: https://ignite.apache.org/docs/latest/sql-reference/date-time-functions > didnt work : Caused by: class org.apache.ignite.internal.processors.query.IgniteSQLException: Failed to parse query. Syntax error in SQL statement " SELECT _EXTID FROM BE_GEN_CONCEPTS_CRSU CP  WHERE CP.DATECREATED>FORMATDATETIME('2024-08-15T13:43:28.028Z','YYYY-MM-DD""T""HH24:MI:SS.FF3""Z""' [*]"; expected "[, ::, *, /, %, +, -, ||, ~, !~, NOT, LIKE, ILIKE, REGEXP, IS, IN, BETWEEN, AND, OR, ,, )"; SQL statement:
+ 			//select _EXTID from be_gen_concepts_cRSU cp  where cp.dateCreated>FORMATDATETIME('2024-08-15T13:43:28.028Z','YYYY-MM-DD"T"HH24:MI:SS.FF3"Z"' [42001-197]
+			//FORMATDATETIME('2024-08-15T13:43:28.028Z', 'YYYY-MM-DD"T"HH24:MI:SS.FF3"Z"')
+			
+			//sWhere=" where cp.dateCreated>FORMATDATETIME('" + DateTime.format(evGetRSUByTC.dateCreated,dtFormat) + "'," + "'YYYY-MM-DD\"T\"HH24:MI:SS.FF3\"Z\"'";
+		
+			
+			//Try: PARSEDATETIME('2024-08-15T13:43:28.028Z', 'yyyy-MM-dd''T''HH:mm:ss.SSS''Z''')
+			//String dtFormatQuery = "'yyyy-MM-dd''T''HH:mm:ss.SSS''Z'''";
+			//sWhere=" where cp.dateCreated>PARSEDATETIME('" + DateTime.format(evGetRSUByTC.dateCreated,dtFormatQuery) + "'," + "'yyyy-MM-dd''T''HH:mm:ss.SSS''Z'''";
+			
+			//Try convert both the dates in millis - didnt work as you cannot use /#Datetime in native-query but only in non-native-bql-query
+			//sWhere=" where /#DateTime/getTimeInMillis(cp.dateCreated)>" + String.valueOfLong(DateTime.getTimeInMillis(evGetRSUByTC.dateCreated));
+			
+			//Try: Using hasmap. This Works. Conclusion: Looks like when querying with Datetime only, only hashmap based queries works. 
+			String sMmapKey = "query_" + Authentication.createUUID();
+		
+			Collections.Map.createLinkedHashMapWithId(sMmapKey);
+			Collections.Map.put(Collections.Map.getMap(sMmapKey), "dateCreated", evGetRSUByTC.dateCreated);
+							
+			// 1. Option: Query.Util.executeInDynamicQuerySession() 
+			Object oResultList = Query.Util.executeInDynamicQuerySession(sQuery,Collections.Map.getMap(sMmapKey),false,30000);
+							
+			//-----using hashmap-over
+			
+			//--Query execution without hashmap -For using, uncomment below: Query.Util.executeInDynamicQuerySession(sQuery, null, false); and comment above
+			sQuery = sQuery + sWhere;
+			System.debugOut("### " + Engine.ruleName() + " Query: " + sQuery);
+			
+			//Object oResultList = Query.Util.executeInDynamicQuerySession(sQuery, null, false);
 			Object[] oRows = Query.Util.listToArray(oResultList);
-
 			Query.Util.clearList(oResultList);
+			
 			int iNumRows = oRows@length;
 
 			for (int i = 0; i < iNumRows; i++) {
 				String sExtID = oRows[i];
-				Concepts.cRSU cp = Instance.getByExtIdByUri(sExtID, "/Concepts/cRSU");
+				//Concepts.cRSU cp = Instance.getByExtIdByUri(sExtID, "/Concepts/cRSU");
+				Concepts.cRSU cp = Cluster.DataGrid.CacheLoadConceptByExtIdByUri(sExtID, false, "/Concepts/cRSU");
 				System.debugOut("### " + Engine.currentRule() + " RSU found: " + cp.RSUNumber + " date created: " + DateTime.format(cp.dateCreated,dtFormat) + ", in millis: " + cp.dateCreatedMillis);
 			}
 			
@@ -58,7 +92,8 @@ rule Rules.rGetRSUsByTimeCreated {
 			System.debugOut("### " + Engine.currentRule() + "======================= Test 1b: Query using Datetime in Millis ===========");
 			System.debugOut("### " + Engine.currentRule() + " Getting RSU after datetime in millis " + evGetRSUByTC.dateCreatedMillis);
 			
-			sWhere=" where /#DateTime/getTimeInMillis(cp.dateCreatedMillis)>" + String.valueOfLong(evGetRSUByTC.dateCreatedMillis);
+			//sWhere=" where /#DateTime/getTimeInMillis(cp.dateCreatedMillis)>" + String.valueOfLong(evGetRSUByTC.dateCreatedMillis);
+			sWhere=" where /#DateTime/getTimeInMillis(cp.dateCreated)>" + String.valueOfLong(evGetRSUByTC.dateCreatedMillis);
 			sQuery = sQuery + sWhere;
 			System.debugOut("### " + Engine.ruleName() + "Query: " + sQuery);
 			
